@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Еріктілік | EriktiKZ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <style>
+        .volunteer-header {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            text-align: center;
+            padding: 100px 20px 60px;
+            margin-bottom: 40px;
+        }
+
+        .volunteer-header h2 {
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .step-card {
+            background: var(--bg);
+            padding: 30px 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            border-left: 4px solid var(--primary);
+            transition: var(--transition);
+        }
+
+        .step-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .step-number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        .benefit-item {
+            background: var(--bg-alt);
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            border-top: 3px solid var(--primary);
+        }
+
+        .benefit-item i {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 40px auto;
+        }
+
+        .faq-item {
+            margin-bottom: 15px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            background: var(--bg-alt);
+            padding: 15px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .faq-question i {
+            transition: transform 0.3s;
+        }
+
+        .faq-question.active i {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+
+        .faq-answer.show {
+            padding: 20px;
+            max-height: 200px;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .video-item {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        .video-item iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        @media (max-width: 992px) {
+            .steps-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .benefits-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .steps-grid {
+                grid-template-columns: 1fr;
+            }
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <aside class="social-sidebar">
+        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" aria-label="Telegram"><i class="fab fa-telegram-plane"></i></a>
+        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+    </aside>
+
+    <header class="transparent-header" id="mainHeader">
+        <div class="container">
+            <a href="chat.html" class="chat-button" title="Чат"><i class="fas fa-comments"></i></a>
+            <h1>EriktiKZ</h1>
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Басты Бет</a></li>
+                    <li><a href="projects.html">Жобалар</a></li>
+                    <li class="active"><a href="volonter.html">Еріктілік</a></li>
+                    <li><a href="forum.html">Форум</a></li>
+                    <li><a href="chat.html">Чаттар</a></li>
+                    <li><a href="profile.html">Профиль</a></li>
+                    <li><a href="ozimiz.html">Біз туралы</a></li>
+                </ul>
+                <div class="user-controls-mobile">
+                    <div class="language-selector">
+                        <select id="languageSelectMobile" onchange="window.changeLanguage(this.value)">
+                            <option value="kk" selected>🇰🇿 Қазақша</option>
+                            <option value="ru">🇷🇺 Русский</option>
+                            <option value="en">🇬🇧 English</option>
+                        </select>
+                    </div>
+                    <button id="modeToggleMobile" class="mode-toggle-btn"><i class="fas fa-moon"></i> Режим</button>
+                    <a href="login.html" id="userLoginTriggerMobile" class="main-btn">Кіру/Тіркелу</a>
+                </div>
+            </nav>
+            <div class="user-controls">
+                <div class="language-selector">
+                    <select id="languageSelect" onchange="window.changeLanguage(this.value)">
+                        <option value="kk" selected>🇰🇿 Қазақша</option>
+                        <option value="ru">🇷🇺 Русский</option>
+                        <option value="en">🇬🇧 English</option>
+                    </select>
+                </div>
+                <button id="modeToggle" class="mode-toggle-btn"><i class="fas fa-moon"></i> Қараңғы Режим</button>
+                <div class="user-account">
+                    <a href="login.html" id="userLoginTrigger" class="main-btn">Кіру/Тіркелу</a>
+                </div>
+            </div>
+            <button id="mobileMenuToggle" class="mobile-menu-toggle" aria-label="Меню">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <div class="volunteer-header">
+        <div class="container">
+            <h2>Еріктілік бойынша құжат</h2>
+            <p style="font-size: 1.2rem;">Қадамдық нұсқаулық, видеоуроктар және жиі сұралатын сұрақтар</p>
+        </div>
+    </div>
+
+    <main class="container">
+        <!-- Пошаговая инструкция -->
+        <section class="section-padding">
+            <h3 class="text-center">Қалай ерікті боламын?</h3>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h4>Тіркелу</h4>
+                    <p>Платформада тіркеліп, профиліңізді толтырыңыз.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h4>Жоба таңдау</h4>
+                    <p>Өзіңізге ұнайтын жобаны тауып, "Қатысу" батырмасын басыңыз.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h4>Өтінім жіберу</h4>
+                    <p>Мотивацияңызды жазып, ұйымдастырушының жауабын күтіңіз.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <h4>Қатысу</h4>
+                    <p>Жобаға қатысып, тәжірибе жинап, сертификат алыңыз.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Преимущества -->
+        <section class="section-padding bg-light">
+            <h3 class="text-center">Неліктен ерікті болу керек?</h3>
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <i class="fas fa-certificate"></i>
+                    <h4>Сертификат</h4>
+                    <p>Әрбір аяқталған жоба үшін ресми сертификат.</p>
+                </div>
+                <div class="benefit-item">
+                    <i class="fas fa-users"></i>
+                    <h4>Жаңа таныстар</h4>
+                    <p>Пайдалы адамдармен танысып, байланыс орнатыңыз.</p>
+                </div>
+                <div class="benefit-item">
+                    <i class="fas fa-star"></i>
+                    <h4>Тәжірибе</h4>
+                    <p>Нақты жобаларда жұмыс істеп, дағдыларыңызды шыңдаңыз.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Видеоуроки -->
+        <section class="section-padding">
+            <h3 class="text-center">Видео нұсқаулықтар</h3>
+            <div class="video-grid">
+                <div>
+                    <div class="video-item">
+                        <iframe src="https://www.youtube.com/embed/O7dCBC2uNqQ" allowfullscreen></iframe>
+                    </div>
+                    <p class="text-center"><i class="fas fa-play-circle" style="color: var(--primary);"></i> Еріктілік бойынша бастама</p>
+                </div>
+                <div>
+                    <div class="video-item">
+                        <iframe src="https://www.youtube.com/embed/9bZkp7q19f0" allowfullscreen></iframe>
+                    </div>
+                    <p class="text-center"><i class="fas fa-play-circle" style="color: var(--primary);"></i> Еріктілердің әсерлі оқиғалары</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="section-padding bg-light">
+            <h3 class="text-center">Жиі сұралатын сұрақтар</h3>
+            <div class="faq-container" id="faqContainer">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Ерікті болу үшін қандай жас болуым керек?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        16 жастан бастап ерікті бола аласыз. Кейбір жобаларда жас шектеулері болуы мүмкін.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Еріктілік ақылы ма?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Жоқ, еріктілік – бұл қоғамға ақысыз көмек көрсету. Дегенмен, кейбір жобаларда тамақтану немесе жол шығындары жабылуы мүмкін.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Сертификат қалай беріледі?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Жоба аяқталған соң профильдегі "Жетістіктер" бөліміне электронды сертификат жүктеледі.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Бір уақытта бірнеше жобаға қатыса аламын ба?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Иә, егер уақытыңыз жетсе, бірнеше жобаға қатыса беріңіз.
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-logo"><h4>EriktiKZ</h4><p>Қазақстанның Волонтерлік Платформасы</p></div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-telegram-plane"></i></a>
+            </div>
+            <p class="copyright">&copy; 2025 EriktiKZ. Барлық құқықтар қорғалған.</p>
+        </div>
+    </footer>
+
+    <button id="scrollToTopBtn" title="Жоғарыға оралу"><i class="fas fa-arrow-up"></i></button>
+
+    <script type="module" src="/js/main.js"></script>
+    <script>
+        // FAQ аккордеон
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                const isActive = question.classList.toggle('active');
+                answer.classList.toggle('show');
+                
+                // Закрыть другие
+                document.querySelectorAll('.faq-question').forEach(q => {
+                    if (q !== question && q.classList.contains('active')) {
+                        q.classList.remove('active');
+                        q.nextElementSibling.classList.remove('show');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

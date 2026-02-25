@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тіркелу | EriktiKZ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <style>
+        .auth-section {
+            min-height: calc(100vh - 200px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+
+        .auth-card {
+            background: var(--bg);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .auth-card h2 {
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .auth-card p {
+            text-align: center;
+            color: var(--text-light);
+            margin-bottom: 30px;
+        }
+
+        .auth-form label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .auth-form input,
+        .auth-form select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: var(--bg-alt);
+            color: var(--text);
+        }
+
+        .auth-form input:focus,
+        .auth-form select:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255,107,53,0.2);
+        }
+
+        .form-message {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            display: none;
+        }
+
+        .form-message.error {
+            background: rgba(255,107,53,0.1);
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+
+        .form-message.success {
+            background: rgba(46,196,182,0.1);
+            color: var(--secondary);
+            border: 1px solid var(--secondary);
+        }
+
+        .auth-footer {
+            text-align: center;
+            margin-top: 20px;
+            color: var(--text-light);
+        }
+
+        .auth-footer a {
+            color: var(--primary);
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <header class="transparent-header" id="mainHeader">
+        <div class="container">
+            <a href="index.html" class="chat-button" title="Басты бет"><i class="fas fa-home"></i></a>
+            <h1>EriktiKZ</h1>
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Басты Бет</a></li>
+                    <li><a href="projects.html">Жобалар</a></li>
+                    <li><a href="forum.html">Форум</a></li>
+                    <li><a href="chat.html">Чаттар</a></li>
+                    <li><a href="profile.html">Профиль</a></li>
+                    <li><a href="ozimiz.html">Біз туралы</a></li>
+                </ul>
+            </nav>
+            <button id="mobileMenuToggle" class="mobile-menu-toggle"><i class="fas fa-bars"></i></button>
+        </div>
+    </header>
+
+    <section class="auth-section">
+        <div class="auth-card">
+            <h2><i class="fas fa-user-plus"></i> Тіркелу</h2>
+            <p>Жаңа аккаунт жасау үшін форманы толтырыңыз.</p>
+            <form id="registerForm" class="auth-form">
+                <label for="regUsername">Пайдаланушы аты</label>
+                <input type="text" id="regUsername" placeholder="Пайдаланушы аты" required minlength="3">
+
+                <label for="regEmail">Email</label>
+                <input type="email" id="regEmail" placeholder="email@example.com" required>
+
+                <label for="regPassword">Құпия сөз</label>
+                <input type="password" id="regPassword" placeholder="Кемінде 5 символ" required minlength="5">
+
+                <label for="regPassword2">Құпия сөзді қайталаңыз</label>
+                <input type="password" id="regPassword2" placeholder="Құпия сөзді қайталаңыз" required>
+
+                <label for="regPhone">Телефон (міндетті емес)</label>
+                <input type="text" id="regPhone" placeholder="+7 ...">
+
+                <label for="regCity">Қала</label>
+                <select id="regCity" required>
+                    <option value="">Қаланы таңдаңыз</option>
+                    <option value="Алматы">Алматы</option>
+                    <option value="Астана">Астана</option>
+                    <option value="Шымкент">Шымкент</option>
+                    <option value="Қарағанды">Қарағанды</option>
+                    <option value="Ақтөбе">Ақтөбе</option>
+                    <option value="Басқа">Басқа</option>
+                </select>
+
+                <label for="regRole">Роль</label>
+                <select id="regRole" required>
+                    <option value="volunteer">Ерікті</option>
+                    <option value="help">Мұқтаж</option>
+                </select>
+
+                <button type="submit" class="main-btn" style="width: 100%;">Тіркелу</button>
+                <div id="registerMessage" class="form-message"></div>
+            </form>
+            <div class="auth-footer">
+                <p>Аккаунтыңыз бар ма? <a href="login.html">Кіру</a></p>
+                <p><a href="index.html">← Басты бетке оралу</a></p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 EriktiKZ. Барлық құқықтар қорғалған.</p>
+        </div>
+    </footer>
+
+    <script type="module" src="/js/main.js"></script>
+    <script type="module" src="/js/pages/register.js"></script>
+</body>
+</html>

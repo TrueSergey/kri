@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Форум | EriktiKZ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <style>
+        .forum-container {
+            max-width: 1000px;
+            margin: 100px auto 40px;
+            padding: 0 20px;
+        }
+
+        .forum-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .forum-header h2 {
+            color: var(--primary);
+            margin: 0;
+        }
+
+        .topic-list {
+            background: var(--bg);
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .topic-header {
+            display: grid;
+            grid-template-columns: 3fr 1fr 1fr 1fr;
+            padding: 15px 20px;
+            background: var(--bg-alt);
+            font-weight: 700;
+            color: var(--secondary);
+            border-bottom: 2px solid var(--border);
+        }
+
+        .topic-item {
+            display: grid;
+            grid-template-columns: 3fr 1fr 1fr 1fr;
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--border);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .topic-item:hover {
+            background: var(--bg-alt);
+        }
+
+        .topic-title {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .topic-meta {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .floating-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 50px;
+            font-size: 1rem;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            transition: var(--transition);
+            z-index: 100;
+        }
+
+        .floating-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+        }
+
+        /* Модальное окно */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal-content {
+            background-color: var(--bg);
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 600px;
+        }
+
+        .close-btn {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close-btn:hover {
+            color: var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            .topic-header {
+                display: none;
+            }
+            .topic-item {
+                grid-template-columns: 1fr;
+                gap: 5px;
+            }
+            .topic-meta {
+                display: flex;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <aside class="social-sidebar">
+        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" aria-label="Telegram"><i class="fab fa-telegram-plane"></i></a>
+        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+    </aside>
+
+    <header class="transparent-header" id="mainHeader">
+        <div class="container">
+            <a href="chat.html" class="chat-button" title="Чат"><i class="fas fa-comments"></i></a>
+            <h1>EriktiKZ</h1>
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Басты Бет</a></li>
+                    <li><a href="projects.html">Жобалар</a></li>
+                    <li><a href="volonter.html">Еріктілік</a></li>
+                    <li class="active"><a href="forum.html">Форум</a></li>
+                    <li><a href="chat.html">Чаттар</a></li>
+                    <li><a href="profile.html">Профиль</a></li>
+                    <li><a href="ozimiz.html">Біз туралы</a></li>
+                </ul>
+                <div class="user-controls-mobile">
+                    <div class="language-selector">
+                        <select id="languageSelectMobile" onchange="window.changeLanguage(this.value)">
+                            <option value="kk" selected>🇰🇿 Қазақша</option>
+                            <option value="ru">🇷🇺 Русский</option>
+                            <option value="en">🇬🇧 English</option>
+                        </select>
+                    </div>
+                    <button id="modeToggleMobile" class="mode-toggle-btn"><i class="fas fa-moon"></i> Режим</button>
+                    <a href="login.html" id="userLoginTriggerMobile" class="main-btn">Кіру/Тіркелу</a>
+                </div>
+            </nav>
+            <div class="user-controls">
+                <div class="language-selector">
+                    <select id="languageSelect" onchange="window.changeLanguage(this.value)">
+                        <option value="kk" selected>🇰🇿 Қазақша</option>
+                        <option value="ru">🇷🇺 Русский</option>
+                        <option value="en">🇬🇧 English</option>
+                    </select>
+                </div>
+                <button id="modeToggle" class="mode-toggle-btn"><i class="fas fa-moon"></i> Қараңғы Режим</button>
+                <div class="user-account">
+                    <a href="login.html" id="userLoginTrigger" class="main-btn">Кіру/Тіркелу</a>
+                </div>
+            </div>
+            <button id="mobileMenuToggle" class="mobile-menu-toggle" aria-label="Меню">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="forum-container">
+        <div class="forum-header">
+            <h2>Қауымдастық форумы</h2>
+            <button id="createTopicBtn" class="main-btn">Жаңа тақырып</button>
+        </div>
+
+        <div class="topic-list">
+            <div class="topic-header">
+                <span>Тақырып</span>
+                <span>Пікірлер</span>
+                <span>Қаралым</span>
+                <span>Соңғы жаңарту</span>
+            </div>
+            <div id="topicList"></div>
+        </div>
+    </main>
+
+    <!-- Кнопка создания темы (плавающая) -->
+    <button id="createTopicFloat" class="floating-btn">
+        <i class="fas fa-plus"></i> Жаңа тақырып
+    </button>
+
+    <!-- Модальное окно для новой темы -->
+    <div id="topicModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="document.getElementById('topicModal').style.display='none'">&times;</span>
+            <h3>Жаңа тақырып құру</h3>
+            <form id="newTopicForm">
+                <div class="form-group">
+                    <label for="topicTitle">Тақырып атауы</label>
+                    <input type="text" id="topicTitle" required>
+                </div>
+                <div class="form-group">
+                    <label for="topicCategory">Санат</label>
+                    <select id="topicCategory" required>
+                        <option value="">Таңдаңыз</option>
+                        <option value="Жалпы">Жалпы</option>
+                        <option value="Техникалық">Техникалық</option>
+                        <option value="Еріктілерге">Еріктілерге</option>
+                        <option value="Көмек сұранысы">Көмек сұранысы</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="topicContent">Мәтін</label>
+                    <textarea id="topicContent" rows="6" required></textarea>
+                </div>
+                <button type="submit" class="main-btn">Жіберу</button>
+                <p id="topicMessage" class="form-message" style="margin-top: 10px;"></p>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-logo"><h4>EriktiKZ</h4><p>Қазақстанның Волонтерлік Платформасы</p></div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-telegram-plane"></i></a>
+            </div>
+            <p class="copyright">&copy; 2025 EriktiKZ. Барлық құқықтар қорғалған.</p>
+        </div>
+    </footer>
+
+    <button id="scrollToTopBtn" title="Жоғарыға оралу"><i class="fas fa-arrow-up"></i></button>
+
+    <script type="module" src="/js/main.js"></script>
+    <script type="module" src="/js/pages/forum.js"></script>
+</body>
+</html>

@@ -1,0 +1,196 @@
+/* ========== ПЕРЕМЕННЫЕ ========== */
+:root {
+    --primary: #ff6b35;
+    --primary-dark: #e05e2f;
+    --secondary: #2ec4b6;
+    --accent: #ff9f1c;
+    --text: #333333;
+    --text-light: #666666;
+    --bg: #ffffff;
+    --bg-alt: #f8f9fa;
+    --bg-hover: #e9ecef;
+    --border: #dee2e6;
+    --border-light: #f1f3f4;
+    --shadow: 0 4px 15px rgba(0,0,0,0.1);
+    --shadow-hover: 0 8px 25px rgba(255,107,53,0.2);
+    --transition: all 0.3s ease;
+}
+
+/* Тёмная тема */
+body.dark-mode {
+    --text: #ffffff;
+    --text-light: #cccccc;
+    --bg: #1a1a1a;
+    --bg-alt: #2c2c2c;
+    --bg-hover: #3a3a3a;
+    --border: #3a3a3a;
+    --border-light: #444;
+}
+
+/* ========== СБРОС ========== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    line-height: 1.6;
+    color: var(--text);
+    background-color: var(--bg);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* ========== ОБЩИЕ ЭЛЕМЕНТЫ ========== */
+h1, h2, h3, h4 {
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: var(--text);
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: var(--transition);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+ul {
+    list-style: none;
+}
+
+/* ========== КНОПКИ ========== */
+.main-btn {
+    display: inline-block;
+    padding: 12px 25px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: 0 5px 15px rgba(255,107,53,0.3);
+    text-align: center;
+}
+
+.main-btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255,107,53,0.5);
+}
+
+/* ========== КАРТОЧКИ ========== */
+.card {
+    background: var(--bg);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    transition: var(--transition);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+}
+
+/* ========== ФОРМЫ ========== */
+.form-group {
+    margin-bottom: 15px;
+}
+
+input, textarea, select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--bg-alt);
+    color: var(--text);
+    transition: var(--transition);
+}
+
+input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(255,107,53,0.2);
+}
+
+.error-message {
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 5px;
+    display: none;
+}
+
+/* ========== УТИЛИТЫ ========== */
+.text-center {
+    text-align: center;
+}
+
+.bg-light {
+    background-color: var(--bg-alt);
+}
+
+.section-padding {
+    padding: 60px 0;
+}
+
+/* ========== МОДАЛЬНЫЕ ОКНА ========== */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+    background-color: var(--bg);
+    margin: 10% auto;
+    padding: 30px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+}
+
+.close-btn {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    color: var(--primary);
+}
+
+/* ========== АНИМАЦИИ ========== */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+}

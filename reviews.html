@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Пікірлер | EriktiKZ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <style>
+        .reviews-container {
+            max-width: 1000px;
+            margin: 100px auto 40px;
+            padding: 0 20px;
+        }
+
+        .review-form-section {
+            background: var(--bg);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            margin-bottom: 40px;
+        }
+
+        .rating-stars {
+            display: flex;
+            gap: 10px;
+            font-size: 2rem;
+            color: #ccc;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+
+        .rating-stars .star {
+            transition: color 0.2s;
+        }
+
+        .rating-stars .star.selected {
+            color: #ffc107;
+        }
+
+        .reviews-list {
+            display: grid;
+            gap: 20px;
+        }
+
+        .review-item {
+            background: var(--bg-alt);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .reviewer {
+            color: var(--primary);
+        }
+
+        .review-date {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .review-rating {
+            color: #ffc107;
+            margin-bottom: 10px;
+        }
+
+        .review-text {
+            color: var(--text);
+        }
+
+        .form-message {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+        }
+
+        .form-message.success {
+            background: rgba(46,196,182,0.1);
+            color: var(--secondary);
+            border: 1px solid var(--secondary);
+        }
+
+        .form-message.error {
+            background: rgba(255,107,53,0.1);
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+    </style>
+</head>
+<body>
+    <aside class="social-sidebar">
+        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" aria-label="Telegram"><i class="fab fa-telegram-plane"></i></a>
+        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+    </aside>
+
+    <header class="transparent-header" id="mainHeader">
+        <div class="container">
+            <a href="chat.html" class="chat-button" title="Чат"><i class="fas fa-comments"></i></a>
+            <h1>EriktiKZ</h1>
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Басты Бет</a></li>
+                    <li><a href="projects.html">Жобалар</a></li>
+                    <li><a href="volonter.html">Еріктілік</a></li>
+                    <li><a href="forum.html">Форум</a></li>
+                    <li><a href="chat.html">Чаттар</a></li>
+                    <li><a href="profile.html">Профиль</a></li>
+                    <li><a href="ozimiz.html">Біз туралы</a></li>
+                </ul>
+                <div class="user-controls-mobile">
+                    <div class="language-selector">
+                        <select id="languageSelectMobile" onchange="window.changeLanguage(this.value)">
+                            <option value="kk" selected>🇰🇿 Қазақша</option>
+                            <option value="ru">🇷🇺 Русский</option>
+                            <option value="en">🇬🇧 English</option>
+                        </select>
+                    </div>
+                    <button id="modeToggleMobile" class="mode-toggle-btn"><i class="fas fa-moon"></i> Режим</button>
+                    <a href="login.html" id="userLoginTriggerMobile" class="main-btn">Кіру/Тіркелу</a>
+                </div>
+            </nav>
+            <div class="user-controls">
+                <div class="language-selector">
+                    <select id="languageSelect" onchange="window.changeLanguage(this.value)">
+                        <option value="kk" selected>🇰🇿 Қазақша</option>
+                        <option value="ru">🇷🇺 Русский</option>
+                        <option value="en">🇬🇧 English</option>
+                    </select>
+                </div>
+                <button id="modeToggle" class="mode-toggle-btn"><i class="fas fa-moon"></i> Қараңғы Режим</button>
+                <div class="user-account">
+                    <a href="login.html" id="userLoginTrigger" class="main-btn">Кіру/Тіркелу</a>
+                </div>
+            </div>
+            <button id="mobileMenuToggle" class="mobile-menu-toggle" aria-label="Меню">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="reviews-container">
+        <!-- Форма отзыва -->
+        <div class="review-form-section">
+            <h3 style="color: var(--primary); margin-bottom: 20px;">Пікір қалдыру</h3>
+            <form id="reviewForm">
+                <div class="form-group">
+                    <label for="volunteerName">Волонтердің аты-жөні (немесе ID)</label>
+                    <input type="text" id="volunteerName" required>
+                </div>
+                <div class="form-group">
+                    <label>Рейтинг</label>
+                    <div class="rating-stars" id="ratingStars">
+                        <i class="fas fa-star star" data-rating="1"></i>
+                        <i class="fas fa-star star" data-rating="2"></i>
+                        <i class="fas fa-star star" data-rating="3"></i>
+                        <i class="fas fa-star star" data-rating="4"></i>
+                        <i class="fas fa-star star" data-rating="5"></i>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="reviewText">Пікір</label>
+                    <textarea id="reviewText" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="main-btn">Пікірді жіберу</button>
+                <div id="reviewMessage" class="form-message"></div>
+            </form>
+        </div>
+
+        <!-- Список отзывов -->
+        <h3 style="margin-bottom: 20px;">Соңғы пікірлер</h3>
+        <div class="reviews-list" id="reviewsList">
+            <!-- JS заполнит -->
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-logo"><h4>EriktiKZ</h4><p>Қазақстанның Волонтерлік Платформасы</p></div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-telegram-plane"></i></a>
+            </div>
+            <p class="copyright">&copy; 2025 EriktiKZ. Барлық құқықтар қорғалған.</p>
+        </div>
+    </footer>
+
+    <button id="scrollToTopBtn" title="Жоғарыға оралу"><i class="fas fa-arrow-up"></i></button>
+
+    <script type="module" src="/js/main.js"></script>
+    <script type="module" src="/js/pages/reviews.js"></script>
+</body>
+</html>

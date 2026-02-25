@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Жобалар | EriktiKZ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/components.css">
+    <style>
+        /* Дополнительные стили только для страницы проектов */
+        .project-page-layout {
+            display: flex;
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            gap: 30px;
+        }
+
+        .sidebar {
+            width: 300px;
+            background: var(--bg-alt);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            height: fit-content;
+        }
+
+        .sidebar h3 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .filter-group {
+            margin-bottom: 20px;
+        }
+
+        .filter-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--secondary);
+        }
+
+        .filter-group select,
+        .filter-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border);
+            border-radius: 5px;
+            background: var(--bg);
+            color: var(--text);
+        }
+
+        .project-list {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .project-card {
+            background: var(--bg);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: var(--transition);
+            border: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .project-card h4 {
+            color: var(--primary);
+            padding: 15px 15px 0;
+            margin-bottom: 5px;
+        }
+
+        .project-card p {
+            padding: 0 15px;
+            font-size: 0.95rem;
+            color: var(--text-light);
+            flex-grow: 1;
+        }
+
+        .project-meta {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 15px;
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border);
+            margin-top: 10px;
+        }
+
+        .project-meta span {
+            display: flex;
+            align-items: center;
+            color: var(--secondary);
+        }
+
+        .project-meta i {
+            margin-right: 5px;
+        }
+
+        .project-footer {
+            padding: 15px;
+            text-align: center;
+        }
+
+        @media (max-width: 900px) {
+            .project-page-layout {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Социальный сайдбар (опционально, можно оставить или убрать) -->
+    <aside class="social-sidebar">
+        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" aria-label="Telegram"><i class="fab fa-telegram-plane"></i></a>
+        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+    </aside>
+
+    <!-- Шапка (такая же как на главной) -->
+    <header class="transparent-header" id="mainHeader">
+        <div class="container">
+            <a href="chat.html" class="chat-button" title="Чат"><i class="fas fa-comments"></i></a>
+            <h1>EriktiKZ</h1>
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Басты Бет</a></li>
+                    <li class="active"><a href="projects.html">Жобалар</a></li>
+                    <li><a href="volonter.html">Еріктілік</a></li>
+                    <li><a href="forum.html">Форум</a></li>
+                    <li><a href="chat.html">Чаттар</a></li>
+                    <li><a href="profile.html">Профиль</a></li>
+                    <li><a href="index.html#contact-section">Карта & Байланыс</a></li>
+                    <li><a href="ozimiz.html">Біз туралы</a></li>
+                </ul>
+                <div class="user-controls-mobile">
+                    <div class="language-selector">
+                        <select id="languageSelectMobile" onchange="window.changeLanguage(this.value)">
+                            <option value="kk" selected>🇰🇿 Қазақша</option>
+                            <option value="ru">🇷🇺 Русский</option>
+                            <option value="en">🇬🇧 English</option>
+                        </select>
+                    </div>
+                    <button id="modeToggleMobile" class="mode-toggle-btn"><i class="fas fa-moon"></i> Режим</button>
+                    <a href="login.html" id="userLoginTriggerMobile" class="main-btn">Кіру/Тіркелу</a>
+                </div>
+            </nav>
+            <div class="user-controls">
+                <div class="language-selector">
+                    <select id="languageSelect" onchange="window.changeLanguage(this.value)">
+                        <option value="kk" selected>🇰🇿 Қазақша</option>
+                        <option value="ru">🇷🇺 Русский</option>
+                        <option value="en">🇬🇧 English</option>
+                    </select>
+                </div>
+                <button id="modeToggle" class="mode-toggle-btn"><i class="fas fa-moon"></i> Қараңғы Режим</button>
+                <div class="user-account">
+                    <a href="login.html" id="userLoginTrigger" class="main-btn">Кіру/Тіркелу</a>
+                </div>
+            </div>
+            <button id="mobileMenuToggle" class="mobile-menu-toggle" aria-label="Меню">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <h2 style="text-align: center; margin-top: 120px; color: var(--primary);">Активті Волонтерлік Жобалар 🌏</h2>
+
+        <div class="project-page-layout">
+            <!-- Боковая панель фильтров -->
+            <div class="sidebar">
+                <h3>Фильтрлер</h3>
+                <div class="filter-group">
+                    <label for="cityFilter"><i class="fas fa-city"></i> Қала</label>
+                    <select id="cityFilter">
+                        <option value="all">Барлық қалалар</option>
+                        <option value="Алматы">Алматы</option>
+                        <option value="Астана">Астана</option>
+                        <option value="Шымкент">Шымкент</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="typeFilter"><i class="fas fa-tag"></i> Түрі</label>
+                    <select id="typeFilter">
+                        <option value="all">Барлық түрлері</option>
+                        <option value="Экология">Экология</option>
+                        <option value="Әлеуметтік">Әлеуметтік</option>
+                        <option value="IT">IT</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="searchFilter"><i class="fas fa-search"></i> Іздеу</label>
+                    <input type="text" id="searchFilter" placeholder="Атауы немесе сипаттама">
+                </div>
+            </div>
+
+            <!-- Список проектов -->
+            <div id="projectList" class="project-list">
+                <!-- JS будет вставлять карточки -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Футер -->
+    <footer>
+        <div class="container">
+            <div class="footer-logo"><h4>EriktiKZ</h4><p>Қазақстанның Волонтерлік Платформасы</p></div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-telegram-plane"></i></a>
+            </div>
+            <p class="copyright">&copy; 2025 EriktiKZ. Барлық құқықтар қорғалған.</p>
+        </div>
+    </footer>
+
+    <!-- Кнопка прокрутки вверх -->
+    <button id="scrollToTopBtn" title="Жоғарыға оралу"><i class="fas fa-arrow-up"></i></button>
+
+    <!-- Подключение скриптов -->
+    <script type="module" src="/js/main.js"></script>
+    <script type="module" src="/js/pages/projects.js"></script>
+</body>
+</html>

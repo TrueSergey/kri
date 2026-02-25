@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EriktiKZ - Басты бет</title>
+    <!-- Подключение шрифтов и иконок -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Наши CSS -->
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/components.css">
+</head>
+<body>
+    <!-- Боковая панель социальных сетей (только на десктопе) -->
+    <aside class="social-sidebar">
+        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" aria-label="Telegram"><i class="fab fa-telegram-plane"></i></a>
+        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+    </aside>
+
+    <!-- Шапка сайта -->
+    <header class="transparent-header" id="mainHeader">
+        <div class="container">
+            <a href="chat.html" class="chat-button" title="Чат"><i class="fas fa-comments"></i></a>
+            <h1>EriktiKZ</h1>
+            <nav id="mainNav">
+                <ul>
+                    <li class="active"><a href="index.html">Басты Бет</a></li>
+                    <li><a href="projects.html">Жобалар</a></li>
+                    <li><a href="volonter.html">Еріктілік</a></li>
+                    <li><a href="forum.html">Форум</a></li>
+                    <li><a href="chat.html">Чаттар</a></li>
+                    <li><a href="profile.html">Профиль</a></li>
+                    <li><a href="#contact-section">Карта & Байланыс</a></li>
+                    <li><a href="ozimiz.html">Біз туралы</a></li>
+                </ul>
+                <!-- Мобильные контролы (будут показаны только в мобильном меню) -->
+                <div class="user-controls-mobile">
+                    <div class="language-selector">
+                        <select id="languageSelectMobile" onchange="window.changeLanguage(this.value)">
+                            <option value="kk" selected>🇰🇿 Қазақша</option>
+                            <option value="ru">🇷🇺 Русский</option>
+                            <option value="en">🇬🇧 English</option>
+                        </select>
+                    </div>
+                    <button id="modeToggleMobile" class="mode-toggle-btn"><i class="fas fa-moon"></i> Режим</button>
+                    <a href="login.html" id="userLoginTriggerMobile" class="main-btn">Кіру/Тіркелу</a>
+                </div>
+            </nav>
+            <!-- Десктопные контролы -->
+            <div class="user-controls">
+                <div class="language-selector">
+                    <select id="languageSelect" onchange="window.changeLanguage(this.value)">
+                        <option value="kk" selected>🇰🇿 Қазақша</option>
+                        <option value="ru">🇷🇺 Русский</option>
+                        <option value="en">🇬🇧 English</option>
+                    </select>
+                </div>
+                <button id="modeToggle" class="mode-toggle-btn"><i class="fas fa-moon"></i> Қараңғы Режим</button>
+                <div class="user-account">
+                    <a href="login.html" id="userLoginTrigger" class="main-btn">Кіру/Тіркелу</a>
+                </div>
+            </div>
+            <!-- Кнопка мобильного меню -->
+            <button id="mobileMenuToggle" class="mobile-menu-toggle" aria-label="Меню">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero секция с видео -->
+    <section class="hero-section">
+        <video autoplay muted loop playsinline class="video-bg">
+            <source src="/assets/videos/bgvid.MP4" type="video/mp4">
+        </video>
+        <div class="video-overlay"></div>
+        <div class="container hero-layout">
+            <div class="hero-text">
+                <h2 id="heroTitle"></h2>
+                <p id="heroSubtitle">Елімізді жақсартуға үлес қосыңыз. Сіздің көмегіңіз күтілуде! Жобаларды таңдап, тіркеліңіз.</p>
+                <a href="login.html" class="main-btn" id="registerBtn"><i class="fas fa-hand-holding-heart"></i> Кіру/Тіркелу</a>
+            </div>
+            <div class="hero-cards">
+                <div class="glass-card" onclick="openHeroModal(this)" data-title="Кепілдік және Қауіпсіздік" data-text="Біздің платформада тіркелген әрбір ұйым мен ерікті толық тексерістен өтеді.">
+                    <i class="fas fa-check-circle"></i><h4>Кепілдік</h4><p>Қауіпсіз еріктілік.</p>
+                </div>
+                <div class="glass-card" onclick="openHeroModal(this)" data-title="Көмек және Қайырымдылық" data-text="Сіз мұқтаж жандарға, көпбалалы отбасыларға көмектесе аласыз.">
+                    <i class="fas fa-hands-helping"></i><h4>Көмек</h4><p>Мұқтаж жандарға қолдау.</p>
+                </div>
+                <div class="glass-card" onclick="openHeroModal(this)" data-title="Тегін Оқу" data-text="Белсенді еріктілер үшін арнайы шеберлік сабақтары тегін өтеді.">
+                    <i class="fas fa-graduation-cap"></i><h4>Оқу</h4><p>Тегін тренингтер.</p>
+                </div>
+                <div class="glass-card" onclick="openHeroModal(this)" data-title="Тәжірибе" data-text="Болашақ жұмысқа орналасуға септігін тигізетін тәжірибе жинаңыз.">
+                    <i class="fas fa-briefcase"></i><h4>Тәжірибе</h4><p>Пайдалы дағдылар.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Блок "Почему выбирают нас" -->
+    <section class="section-padding">
+        <div class="container">
+            <h3>Неліктен Бізді Таңдау Керек?</h3>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h4>Жақын Жобалар</h4>
+                    <p>Өзіңіз тұратын аймақтағы өзекті еріктілік миссияларын бірден табыңыз.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-certificate"></i>
+                    <h4>Ресми Сертификат</h4>
+                    <p>Әрбір аяқталған жұмыс үшін тәжірибеңізді растайтын электронды сертификат беріледі.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-hands-helping"></i>
+                    <h4>Қауымдастық</h4>
+                    <p>Басқа еріктілермен байланысып, тәжірибе алмасу үшін арнайы форум мен чат бар.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Секция с опросом -->
+    <section class="section-padding bg-light" id="pollSection">
+        <div class="container">
+            <div class="card" id="pollCard">
+                <h3 class="text-center">📊 Сіздің пікіріңіз маңызды</h3>
+                <p class="text-center">Келесі іс-шара қайда өткенін қалайсыз?</p>
+                <div id="pollOptions" class="poll-grid">
+                    <div class="poll-option" data-option="almaty" onclick="vote(this, 35)">
+                        <div class="poll-fill" style="width: 35%;"></div>
+                        <div class="poll-text"><span>Алматы</span><span>35%</span></div>
+                    </div>
+                    <div class="poll-option" data-option="astana" onclick="vote(this, 50)">
+                        <div class="poll-fill" style="width: 50%;"></div>
+                        <div class="poll-text"><span>Астана</span><span>50%</span></div>
+                    </div>
+                    <div class="poll-option" data-option="shymkent" onclick="vote(this, 15)">
+                        <div class="poll-fill" style="width: 15%;"></div>
+                        <div class="poll-text"><span>Шымкент</span><span>15%</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Статистика -->
+    <section class="section-padding text-center" id="statsSection">
+        <div class="container">
+            <h3>Біздің Жетістіктеріміз Сандармен</h3>
+            <div class="stats-grid">
+                <div class="stat-item"><div class="counter-value" data-target="28000">0</div><div class="counter-label">Тіркелген Еріктілер</div></div>
+                <div class="stat-item"><div class="counter-value" data-target="540">0</div><div class="counter-label">Аяқталған Жобалар</div></div>
+                <div class="stat-item"><div class="counter-value" data-target="450000">0</div><div class="counter-label">Көмек Көрсетілген Сағат</div></div>
+                <div class="stat-item"><div class="counter-value" data-target="15">0</div><div class="counter-label">Қамтылған Қалалар</div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Новостная карусель -->
+    <section class="section-padding">
+        <div class="container">
+            <h3>Соңғы Жаңалықтар</h3>
+            <div class="carousel-container">
+                <button id="prevBtn" class="carousel-nav-btn"><i class="fas fa-chevron-left"></i></button>
+                <div class="news-carousel-track" id="newsCarouselTrack">
+                    <div class="news-item">
+                        <div class="news-card">
+                            <img src="/assets/images/unnamed.jpg" alt="Мектептерге көмек" class="news-image" loading="lazy">
+                            <div class="news-content">
+                                <h4>Мектептерге Көмек</h4>
+                                <p>Ауыл мектептеріне көмек көрсетілді.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="news-item">
+                        <div class="news-card">
+                            <img src="/assets/images/ayy.png" alt="Тазалау жұмыстары" class="news-image" loading="lazy">
+                            <div class="news-content">
+                                <h4>Таза Қазақстан</h4>
+                                <p>Сенбіліктер өтті.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="news-item">
+                        <div class="news-card">
+                            <img src="/assets/images/fer.png" alt="Қарттарға қамқорлық" class="news-image" loading="lazy">
+                            <div class="news-content">
+                                <h4>Қарттарға Қамқорлық</h4>
+                                <p>Қарттар үйіне бару.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="news-item">
+                        <div class="news-card">
+                            <img src="/assets/images/erre.png" alt="Волонтерлік жобасы" class="news-image" loading="lazy">
+                            <div class="news-content">
+                                <h4>Волонтерлік</h4>
+                                <p>Ағаштар егу.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button id="nextBtn" class="carousel-nav-btn"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Партнёры -->
+    <section class="partners-section section-padding bg-light">
+        <div class="container">
+            <h3>Біздің Сенімді Серіктестеріміз</h3>
+            <div class="partners-grid">
+                <div class="partner-logo-btn" data-partner-id="partnerA"><i class="fas fa-graduation-cap"></i><span>А-Қоры</span></div>
+                <div class="partner-logo-btn" data-partner-id="partnerB"><i class="fas fa-code"></i><span>B-Техно</span></div>
+                <div class="partner-logo-btn" data-partner-id="partnerC"><i class="fas fa-leaf"></i><span>C-Green</span></div>
+                <div class="partner-logo-btn" data-partner-id="partnerD"><i class="fas fa-university"></i><span>Университет</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Лидеры месяца -->
+    <section class="leaderboard-section section-padding">
+        <div class="container">
+            <h3>Айдың Үздік Еріктілері 🏆</h3>
+            <div class="leaderboard-grid">
+                <div class="leader-card silver">
+                    <div class="crown"><i class="fas fa-medal"></i></div>
+                    <img src="/assets/images/avatar1.jpg" alt="Айгерім С." loading="lazy">
+                    <h4>Айгерім С.</h4>
+                    <span class="points">1250 ұпай</span>
+                    <p>Экология</p>
+                </div>
+                <div class="leader-card gold">
+                    <div class="crown"><i class="fas fa-crown"></i></div>
+                    <img src="/assets/images/avatar2.jpg" alt="Олжас К." loading="lazy">
+                    <h4>Олжас К.</h4>
+                    <span class="points">1500 ұпай</span>
+                    <p>Әлеуметтік көмек</p>
+                </div>
+                <div class="leader-card bronze">
+                    <div class="crown"><i class="fas fa-medal"></i></div>
+                    <img src="/assets/images/avatar3.jpg" alt="Дмитрий П." loading="lazy">
+                    <h4>Дмитрий П.</h4>
+                    <span class="points">1100 ұпай</span>
+                    <p>IT волонтер</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Истории успеха -->
+    <section class="section-padding bg-light">
+        <div class="container">
+            <h3>Истории Успеха Волонтеров</h3>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <img src="/assets/images/unnamed.jpg" alt="Помощь школам в Алматы" class="story-image" loading="lazy">
+                    <h4>Как Волонтеры Помогли Школам в Алматы</h4>
+                    <p>Команда волонтеров собрала учебники и оборудование для сельских школ. Результат: 500 детей получили качественное образование.</p>
+                    <a href="#" class="main-btn">Толығырақ оқу</a>
+                </div>
+                <div class="feature-item">
+                    <img src="/assets/images/ayy.png" alt="Экологическая акция в Астане" class="story-image" loading="lazy">
+                    <h4>Экологическая Акция: Чистый Казахстан</h4>
+                    <p>Волонтеры очистили парки и реки от мусора. Участвовало более 200 человек, собрано 5 тонн отходов.</p>
+                    <a href="#" class="main-btn">Толығырақ оқу</a>
+                </div>
+                <div class="feature-item">
+                    <img src="/assets/images/fer.png" alt="Помощь пожилым в Шымкенте" class="story-image" loading="lazy">
+                    <h4>Забота о Пожилых в Шымкенте</h4>
+                    <p>Волонтеры организовали концерты и помощь по дому для одиноких пенсионеров. Более 100 человек получили поддержку.</p>
+                    <a href="#" class="main-btn">Толығырақ оқу</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Галерея и загрузка фото -->
+    <section class="section-padding">
+        <div class="container">
+            <h3>Галерея Волонтерских Проектов</h3>
+            <!-- Swiper будет инициализирован позже -->
+            <div class="swiper gallery-swiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"><img src="/assets/images/unnamed.jpg" alt="Проект помощи школам" loading="lazy"><p>Помощь школам в Алматы</p></div>
+                    <div class="swiper-slide"><img src="/assets/images/ayy.png" alt="Экологический проект" loading="lazy"><p>Тазалау жұмыстары</p></div>
+                    <div class="swiper-slide"><img src="/assets/images/fer.png" alt="Помощь пожилым" loading="lazy"><p>Қарттарға қамқорлық</p></div>
+                    <div class="swiper-slide"><img src="/assets/images/erre.png" alt="Посадка деревьев" loading="lazy"><p>Ағаштар егу</p></div>
+                </div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+            <div class="upload-form" style="margin-top: 40px;">
+                <form id="photoUploadForm">
+                    <div class="form-group">
+                        <label for="photoFile" class="sr-only">Выберите фото</label>
+                        <input type="file" id="photoFile" name="photo" accept="image/*" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="photoCaption" class="sr-only">Описание</label>
+                        <input type="text" id="photoCaption" name="caption" placeholder="Описание проекта" required>
+                    </div>
+                    <button type="submit" class="main-btn">Загрузить</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Карта и контактная форма -->
+    <section id="contact-section" class="section-padding">
+        <div class="container">
+            <h3 class="text-center">Біздің Орналасқан Жеріміз</h3>
+            <div id="googleMap" class="contact-map" style="height: 400px;"></div>
+            <div class="contact-form" style="margin-top: 40px;">
+                <h3 class="text-center">Сұрақтарыңыз Бар ма?</h3>
+                <form id="contactForm">
+                    <div class="form-group">
+                        <input type="text" id="contactName" placeholder="Аты-жөніңіз" required>
+                        <span class="error-message"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="contactEmail" placeholder="Email" required>
+                        <span class="error-message"></span>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="contactMessage" rows="4" placeholder="Хабарлама" required></textarea>
+                        <span class="error-message"></span>
+                    </div>
+                    <button type="submit" class="main-btn submit-btn">Жіберу</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer>
+        <div class="container">
+            <div class="footer-logo"><h4>EriktiKZ</h4><p>Қазақстанның Волонтерлік Платформасы</p></div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-telegram-plane"></i></a>
+            </div>
+            <p class="copyright">&copy; 2025 EriktiKZ. Барлық құқықтар қорғалған.</p>
+        </div>
+    </footer>
+
+    <!-- Модальные окна -->
+    <div id="heroInfoModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeHeroModal()">&times;</span>
+            <h3 id="heroModalTitle" style="color: var(--primary);"></h3>
+            <p id="heroModalText"></p>
+            <button onclick="closeHeroModal()" class="main-btn">Жабу</button>
+        </div>
+    </div>
+
+    <div id="partnerDetailsModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('partnerDetailsModal')">&times;</span>
+            <h4>Серіктес</h4>
+            <p id="partnerDescription"></p>
+            <button onclick="closeModal('partnerDetailsModal')" class="main-btn">Жабу</button>
+        </div>
+    </div>
+
+    <!-- Кнопка прокрутки вверх -->
+    <button id="scrollToTopBtn" title="Жоғарыға оралу"><i class="fas fa-arrow-up"></i></button>
+
+    <!-- Подключение скриптов -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?callback=initMap"></script>
+    <script type="module" src="/js/main.js"></script>
+    <script type="module" src="/js/pages/index.js"></script>
+</body>
+</html>
