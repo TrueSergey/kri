@@ -1,5 +1,5 @@
 // js/main.js
-import { applyTranslation, changeLanguage as i18nChange } from './i18n.js';
+import { applyTranslation, changeLanguage as i18nChange } from './i118n.js';
 
 // ========== ТЁМНАЯ ТЕМА ==========
 const body = document.body;
@@ -140,7 +140,7 @@ initTheme();
 // Применяем перевод после загрузки DOM
 document.addEventListener('DOMContentLoaded', () => {
     // Подключаем объект переводов глобально
-    import('./i18n.js').then(module => {
+    import('./i118n.js').then(module => {
         window.translations = module.translations;
         module.applyTranslation();
         updateAuthUI();
