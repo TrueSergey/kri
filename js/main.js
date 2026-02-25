@@ -1,4 +1,5 @@
 // js/main.js
+import { applyTranslation, changeLanguage as i18nChange } from './i18n.js';
 
 // ========== ТЁМНАЯ ТЕМА ==========
 const body = document.body;
@@ -10,23 +11,28 @@ function initTheme() {
     if (saved === 'dark') {
         body.classList.add('dark-mode');
     }
-    updateThemeButtons();
+    updateThemeToggleText();
 }
 
 function toggleTheme() {
     body.classList.toggle('dark-mode');
     const isDark = body.classList.contains('dark-mode');
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
-    updateThemeButtons();
+    updateThemeToggleText();
 }
 
-function updateThemeButtons() {
+function updateThemeToggleText() {
     const isDark = body.classList.contains('dark-mode');
-    const text = isDark ? 'Жарық Режим' : 'Қараңғы Режим';
+    const text = isDark ? 'lightMode' : 'darkMode';
+    // Используем глобальную функцию перевода (будет доступна после загрузки i18n)
+    const lang = localStorage.getItem('language') || 'kk';
+    const t = window.translations?.[lang] || {};
+    const modeText = t[text] || (isDark ? 'Жарық Режим' : 'Қараңғы Режим');
     const icon = isDark ? 'fa-sun' : 'fa-moon';
-    if (themeToggle) themeToggle.innerHTML = `<i class="fas ${icon}"></i> ${text}`;
-    if (themeToggleMobile) themeToggleMobile.innerHTML = `<i class="fas ${icon}"></i> ${text}`;
+    if (themeToggle) themeToggle.innerHTML = `<i class="fas ${icon}"></i> ${modeText}`;
+    if (themeToggleMobile) themeToggleMobile.innerHTML = `<i class="fas ${icon}"></i> ${modeText}`;
 }
+window.updateThemeToggleText = updateThemeToggleText;
 
 if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
 if (themeToggleMobile) themeToggleMobile.addEventListener('click', toggleTheme);
@@ -43,7 +49,6 @@ if (mobileToggle && mainNav) {
         icon.classList.toggle('fa-times');
     });
 
-    // Закрыть меню при клике на ссылку
     mainNav.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', () => {
             mainNav.classList.remove('active');
@@ -55,29 +60,30 @@ if (mobileToggle && mainNav) {
 }
 
 // ========== ОБНОВЛЕНИЕ UI В ЗАВИСИМОСТИ ОТ АВТОРИЗАЦИИ ==========
-function updateAuthUI() {
+export function updateAuthUI() {
     const username = localStorage.getItem('username');
     const loginTrigger = document.getElementById('userLoginTrigger');
     const loginTriggerMobile = document.getElementById('userLoginTriggerMobile');
     const registerBtn = document.getElementById('registerBtn');
 
+    const lang = localStorage.getItem('language') || 'kk';
+    const t = window.translations?.[lang] || {};
+
     if (username) {
-        // Пользователь залогинен
         if (loginTrigger) {
-            loginTrigger.textContent = 'Профиль';
+            loginTrigger.textContent = t.profileBtn || 'Профиль';
             loginTrigger.href = 'profile.html';
         }
         if (loginTriggerMobile) {
-            loginTriggerMobile.textContent = 'Профиль';
+            loginTriggerMobile.textContent = t.profileBtn || 'Профиль';
             loginTriggerMobile.href = 'profile.html';
         }
         if (registerBtn) {
-            registerBtn.innerHTML = `<i class="fas fa-user-circle"></i> Профильге өту`;
+            registerBtn.innerHTML = `<i class="fas fa-user-circle"></i> ${t.profileBtn || 'Профиль'}`;
             registerBtn.href = 'profile.html';
         }
     } else {
-        // Гость
-        const loginText = 'Кіру/Тіркелу';
+        const loginText = t.loginBtn || 'Кіру/Тіркелу';
         if (loginTrigger) {
             loginTrigger.textContent = loginText;
             loginTrigger.href = 'login.html';
@@ -92,18 +98,14 @@ function updateAuthUI() {
         }
     }
 }
+window.updateAuthUI = updateAuthUI;
 
 // ========== ПРОКРУТКА ВВЕРХ ==========
 const scrollBtn = document.getElementById('scrollToTopBtn');
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 300) {
-        scrollBtn.style.display = 'block';
-    } else {
-        scrollBtn.style.display = 'none';
-    }
-});
-
 if (scrollBtn) {
+    window.addEventListener('scroll', () => {
+        scrollBtn.style.display = window.scrollY > 300 ? 'block' : 'none';
+    });
     scrollBtn.addEventListener('click', () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
@@ -133,6 +135,14 @@ window.closeHeroModal = function() {
     document.getElementById('heroInfoModal').style.display = 'none';
 };
 
-// ========== ИНИЦИАЛИЗАЦИЯ ПРИ ЗАГРУЗКЕ ==========
+// ========== ИНИЦИАЛИЗАЦИЯ ==========
 initTheme();
-updateAuthUI();
+// Применяем перевод после загрузки DOM
+document.addEventListener('DOMContentLoaded', () => {
+    // Подключаем объект переводов глобально
+    import('./i18n.js').then(module => {
+        window.translations = module.translations;
+        module.applyTranslation();
+        updateAuthUI();
+    });
+});

@@ -1,0 +1,45 @@
+<header class="transparent-header" id="mainHeader">
+    <div class="container">
+        <a href="chat.html" class="chat-button" title="Чат"><i class="fas fa-comments"></i></a>
+        <h1>EriktiKZ</h1>
+        <nav id="mainNav">
+            <ul>
+                <li><a href="index.html" data-i18n="navHome">Басты Бет</a></li>
+                <li><a href="projects.html" data-i18n="navProjects">Жобалар</a></li>
+                <li><a href="volonter.html" data-i18n="navVolunteer">Еріктілік</a></li>
+                <li><a href="forum.html" data-i18n="navForum">Форум</a></li>
+                <li><a href="chat.html" data-i18n="navChats">Чаттар</a></li>
+                <li><a href="profile.html" data-i18n="navProfile">Профиль</a></li>
+                <li><a href="#contact-section" data-i18n="navContact">Карта & Байланыс</a></li>
+                <li><a href="ozimiz.html" data-i18n="navAbout">Біз туралы</a></li>
+            </ul>
+            <div class="user-controls-mobile">
+                <div class="language-selector">
+                    <select id="languageSelectMobile" onchange="changeLanguage(this.value)">
+                        <option value="kk">🇰🇿 Қазақша</option>
+                        <option value="ru">🇷🇺 Русский</option>
+                        <option value="en">🇬🇧 English</option>
+                    </select>
+                </div>
+                <button id="modeToggleMobile" class="mode-toggle-btn"><i class="fas fa-moon"></i> Режим</button>
+                <a href="login.html" id="userLoginTriggerMobile" class="main-btn" data-i18n="loginBtn">Кіру/Тіркелу</a>
+            </div>
+        </nav>
+        <div class="user-controls">
+            <div class="language-selector">
+                <select id="languageSelect" onchange="changeLanguage(this.value)">
+                    <option value="kk">🇰🇿 Қазақша</option>
+                    <option value="ru">🇷🇺 Русский</option>
+                    <option value="en">🇬🇧 English</option>
+                </select>
+            </div>
+            <button id="modeToggle" class="mode-toggle-btn"><i class="fas fa-moon"></i> Қараңғы Режим</button>
+            <div class="user-account">
+                <a href="login.html" id="userLoginTrigger" class="main-btn" data-i18n="loginBtn">Кіру/Тіркелу</a>
+            </div>
+        </div>
+        <button id="mobileMenuToggle" class="mobile-menu-toggle" aria-label="Меню">
+            <i class="fas fa-bars"></i>
+        </button>
+    </div>
+</header>

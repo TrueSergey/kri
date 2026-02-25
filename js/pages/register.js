@@ -1,4 +1,5 @@
 // js/pages/register.js
+import { updateAuthUI } from '../main.js';
 
 const registerForm = document.getElementById('registerForm');
 const registerMessage = document.getElementById('registerMessage');
@@ -14,7 +15,6 @@ registerForm.addEventListener('submit', async (e) => {
     const city = document.getElementById('regCity').value;
     const role = document.getElementById('regRole').value;
 
-    // Валидация
     if (!username || username.length < 3) {
         showMessage('Пайдаланушы аты 3 символдан кем болмауы керек', 'error');
         return;
@@ -36,19 +36,17 @@ registerForm.addEventListener('submit', async (e) => {
         return;
     }
 
-    // Показываем сообщение
     registerMessage.style.display = 'block';
     registerMessage.textContent = 'Тіркелу...';
     registerMessage.className = 'form-message';
 
-    // Имитация запроса
     try {
         await new Promise(resolve => setTimeout(resolve, 1000));
 
-        // Успешная регистрация (демо)
         localStorage.setItem('username', username);
         localStorage.setItem('userRole', role);
         showMessage('Тіркелу сәтті! Профильге өту...', 'success');
+        updateAuthUI();
         setTimeout(() => {
             window.location.href = 'profile.html';
         }, 1500);
